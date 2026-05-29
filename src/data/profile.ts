@@ -24,7 +24,7 @@ export const orgs: Record<string, Org> = {
     role: 'Senior Frontend Software Engineer',
     period: '2022 – Present',
     summary:
-      'Senior frontend engineer at KeyBank, building a greenfield account-opening platform now used by 1,500+ bankers nationwide.',
+      'Senior engineer at KeyBank: built a greenfield account-opening platform now used by 1,500+ bankers nationwide, now building the bank\'s first internal AI agents.',
   },
   kualia: {
     slug: 'kualia',
@@ -72,7 +72,7 @@ export const socials = [
   },
   {
     name: 'LinkedIn',
-    url: 'https://www.linkedin.com/in/igor-amidzic/',
+    url: 'https://www.linkedin.com/in/igor-amidzic',
     icon: 'linkedin',
   },
   {

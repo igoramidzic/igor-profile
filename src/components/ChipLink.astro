@@ -2,6 +2,12 @@
 // An inline link styled as a small pill with a logo, meant to sit inside a
 // sentence. Internal links point at /<slug> pages; pass `external` for outbound
 // links (e.g. kualia.com) so they open in a new tab.
+//
+// NOTE: the markup is intentionally placed AFTER the <style> block and the file
+// ends exactly at </a> with no trailing newline. Astro renders a component's
+// trailing template whitespace as a text node, which (for an inline element)
+// shows up as a stray space between the chip and the next character — e.g.
+// "KeyBank , where". Keeping </a> as the very last byte avoids that.
 interface Props {
   href: string;
   label: string;
@@ -13,19 +19,13 @@ const rel = external ? 'noopener noreferrer' : undefined;
 const target = external ? '_blank' : undefined;
 ---
 
-<a class="chip" href={href} target={target} rel={rel}>
-  <img class="chip-logo" src={logo} alt="" aria-hidden="true" loading="lazy" />
-  <span>{label}</span>
-  {external && <span class="chip-ext" aria-hidden="true">↗</span>}
-</a>
-
 <style>
   .chip {
     display: inline-flex;
     align-items: center;
     gap: 0.4em;
     vertical-align: -0.16em;
-    margin: 0 0.06em;
+    margin: 0;
     padding: 0.12em 0.55em 0.12em 0.45em;
     border: 1px solid var(--border-strong);
     border-radius: 999px;
@@ -59,3 +59,4 @@ const target = external ? '_blank' : undefined;
     color: var(--text-dim);
   }
 </style>
+<a class="chip" href={href} target={target} rel={rel}><img class="chip-logo" src={logo} alt="" aria-hidden="true" loading="lazy" /><span>{label}</span>{external && <span class="chip-ext" aria-hidden="true">↗</span>}</a>

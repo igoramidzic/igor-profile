@@ -4,7 +4,7 @@ import ChipLink from '../components/ChipLink.astro';
 import Socials from '../components/Socials.astro';
 import { orgs } from '../data/profile';
 
-const { keybank, kualia, 'foundations-it': foundations, vanguard, usf } = orgs;
+const { keybank, kualia } = orgs;
 ---
 
 <Base>
@@ -16,9 +16,23 @@ const { keybank, kualia, 'foundations-it': foundations, vanguard, usf } = orgs;
 
     <article class="prose">
       <p>
-        I'm a software engineer who's been building for over a decade. I care
-        most about web and mobile products that feel polished and are genuinely
-        pleasant to use, the kind where the details quietly add up.
+        I'm a senior software engineer with a decade of experience across the
+        full stack, strongest on the frontend in <strong>TypeScript</strong> and
+        <strong>Angular</strong>, with <strong>React</strong> in the mix lately.
+        Over the last year I've gradually shifted from writing every line by hand
+        to building apps primarily with Claude Code. Leaning on my engineering
+        experience, I spend less time on the exact syntax of a given framework
+        like React and more time mapping the frontend concepts that carry across
+        all of them, then using that to keep the agent headed in the right
+        direction.
+      </p>
+
+      <p>
+        That workflow runs on <strong>Claude Code</strong>, my daily driver,
+        which I prompt by voice with <strong>WisprFlow</strong> to get past the
+        typing-speed bottleneck. I've put real work into sharpening how I prompt,
+        which has roughly 10x'd my output while keeping code quality around a
+        self-proclaimed 90% of what I'd write by hand.
       </p>
 
       <p>
@@ -27,7 +41,9 @@ const { keybank, kualia, 'foundations-it': foundations, vanguard, usf } = orgs;
           label={keybank.label}
           logo={keybank.logo}
         />, where I joined a greenfield platform on day one and helped grow it
-        into a tool now used by 1,500+ bankers across the country.
+        into a tool now used by 1,500+ bankers across the country. At this large bank,
+        AI tools are still new and slow to become available. We're stuck using lower quality models
+        from Gemini.
       </p>
 
       <p>
@@ -37,23 +53,10 @@ const { keybank, kualia, 'foundations-it': foundations, vanguard, usf } = orgs;
           logo={kualia.logo}
         />, a budgeting app for iPhone and web that I designed, built, and
         shipped entirely myself, from the interface down to the system that
-        powers it.
-      </p>
-
-      <p>
-        Before all that, I worked my way from developer to team lead at <ChipLink
-          href={`/${foundations.slug}`}
-          label={foundations.label}
-          logo={foundations.logo}
-        />, spent an uneventful six months at <ChipLink
-          href={`/${vanguard.slug}`}
-          label={vanguard.label}
-          logo={vanguard.logo}
-        />, and studied computer science at <ChipLink
-          href={`/${usf.slug}`}
-          label={usf.label}
-          logo={usf.logo}
-        />.
+        powers it. I first built it in <strong>Flutter</strong> and
+        <strong>Supabase</strong>, then rewrote it from scratch, 100%
+        agentically with Claude Code, in <strong>SwiftUI</strong>,
+        <strong>Convex</strong>, and <strong>Angular</strong>.
       </p>
 
       <p>

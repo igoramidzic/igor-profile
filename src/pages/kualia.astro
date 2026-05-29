@@ -1,14 +1,16 @@
 ---
 import Experience from '../layouts/Experience.astro';
-import ChipLink from '../components/ChipLink.astro';
 import { orgs } from '../data/profile';
 ---
 
 <Experience org={orgs.kualia}>
   <p>
-    Kualia is a <strong>budgeting app</strong> that helps people give every dollar
-    a job and feel in control of their money. I came up with the idea, designed
-    it, built it, and launched it, entirely on my own.
+    Kualia is a budgeting app that helps people give every dollar a job and feel
+    in control of their money. I built it because I was a paying <strong>YNAB</strong>
+    user and loved envelope budgeting, but wanted something that fit the way I
+    think about my money. Envelope budgeting is far from a new
+    idea; I just wanted my own take on it, and I designed, built, and launched it
+    entirely on my own.
   </p>
 
   <p>
@@ -20,17 +22,118 @@ import { orgs } from '../data/profile';
   </p>
 
   <p>
-    It's live on the App Store today and earns around <strong>$300</strong> in recurring
-    revenue every month. It's the project I'm proudest of, because every part of
+    It's live on the App Store today and earns around $300 in recurring revenue
+    every month. It's the project I'm proudest of, because every part of
     it, good and bad, is a decision I made and shipped.
   </p>
 
+  <figure class="shot shot--card">
+    <img
+      src="/images/kualia-main.png"
+      alt="The Kualia budget on web and iPhone, showing envelopes for the month with assigned, activity, and available amounts."
+      width="3118"
+      height="2166"
+      loading="lazy"
+    />
+  </figure>
+
+  <h2 class="section">Connecting your budget to AI</h2>
+
   <p>
-    You can see it for yourself at <ChipLink
+    The piece I'm most excited about lately is the <a
+      href="https://kualia.com/mcp"
+      target="_blank"
+      rel="noopener noreferrer">MCP server<span class="ext" aria-hidden="true"
+        >↗</span
+      ></a
+    >. Kualia speaks the Model Context Protocol, so any assistant
+    you already pay for, Claude, ChatGPT, Cursor, Perplexity, can read your
+    transactions, envelopes, recurring bills, and reports directly, with your
+    permission. You ask questions in plain English instead of opening
+    dashboards: <em>"What categories am I overspending in this month?"</em> or
+    <em>"Which subscriptions haven't I used this quarter?"</em>
+  </p>
+
+  <p>
+    It does more than read. With your approval it can reassign money between
+    envelopes, set assigned amounts, and import a CSV of transactions straight
+    from the chat. Read-only tools run on their own; anything that writes asks
+    you first.
+  </p>
+
+  <figure class="shot">
+    <img
+      src="/images/kualia-mcp.png"
+      alt="Claude Code connected to the Kualia MCP server, calling the envelope status tool and reporting overspending across three categories."
+      width="2053"
+      height="1367"
+      loading="lazy"
+    />
+  </figure>
+
+  <p>
+    Under the hood it's a JSON-RPC endpoint on the Convex backend, authenticated
+    with a full <strong>OAuth 2.1 + PKCE</strong> server I implemented myself, so
+    there are no API keys to paste and every token is scoped to your workspace.
+    The trick that keeps it sane is a single tool registry: one
+    TypeScript array is the source of truth, and both the public MCP server and
+    the in-app AI chat run through the same code path and the same scope checks.
+    Add a tool once and both surfaces get it.
+  </p>
+
+  <p>
+    You can see it for yourself at <a
       href="https://kualia.com"
-      label="kualia.com"
-      logo={orgs.kualia.logo}
-      external
-    />.
+      target="_blank"
+      rel="noopener noreferrer">kualia.com<span class="ext" aria-hidden="true"
+        >↗</span
+      ></a
+    >.
   </p>
 </Experience>
+
+<style>
+  /* Screenshot figures. `.shot--card` sits the (transparent) app screenshot on
+     a soft gradient panel, mirroring the hero treatment on kualia.com; the
+     plain `.shot` is for screenshots that already carry their own frame. */
+  .shot {
+    margin: 2rem 0;
+  }
+  .shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  .shot--card {
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 20% 80%, rgba(94, 106, 210, 0.12), transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(229, 229, 229, 0.45), transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(163, 163, 163, 0.18), transparent 60%),
+      linear-gradient(135deg, #f6f6fa, #eceaf4);
+  }
+  .shot--card img {
+    border: 0;
+    border-radius: 0;
+  }
+  .section {
+    margin: 2.5rem 0 1.15rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  /* trailing "open in new tab" arrow on prose links; inline-block keeps the
+     glyph clear of the link's underline */
+  .ext {
+    display: inline-block;
+    margin-left: 0.12em;
+    font-size: 0.78em;
+    color: var(--muted);
+    text-decoration: none;
+  }
+</style>
