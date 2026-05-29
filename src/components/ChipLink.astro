@@ -52,11 +52,16 @@ const target = external ? '_blank' : undefined;
     flex: none;
   }
   .chip-ext {
+    margin-left: -0.2em;
     font-size: 0.78em;
     color: var(--muted);
+    transition:
+      transform 0.18s ease,
+      color 0.18s ease;
   }
   .chip:hover .chip-ext {
     color: var(--text-dim);
+    transform: translateX(1.5px);
   }
 </style>
-<a class="chip" href={href} target={target} rel={rel}><img class="chip-logo" src={logo} alt="" aria-hidden="true" loading="lazy" /><span>{label}</span>{external && <span class="chip-ext" aria-hidden="true">↗</span>}</a>
+<a class="chip" href={href} target={target} rel={rel}><img class="chip-logo" src={logo} alt="" aria-hidden="true" loading="lazy" /><span>{label}</span><span class="chip-ext" aria-hidden="true">{external ? '↗' : '→'}</span></a>

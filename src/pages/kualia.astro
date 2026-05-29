@@ -51,7 +51,7 @@ import { orgs } from '../data/profile';
     transactions, envelopes, recurring bills, and reports directly, with your
     permission. You ask questions in plain English instead of opening
     dashboards: <em>"What categories am I overspending in this month?"</em> or
-    <em>"Which subscriptions haven't I used this quarter?"</em>
+    <em>"How much am I spending on recurring subscriptions?"</em>
   </p>
 
   <p>
@@ -72,9 +72,9 @@ import { orgs } from '../data/profile';
   </figure>
 
   <p>
-    Under the hood it's a JSON-RPC endpoint on the Convex backend, authenticated
-    with a full <strong>OAuth 2.1 + PKCE</strong> server I implemented myself, so
-    there are no API keys to paste and every token is scoped to your workspace.
+    Under the hood it's a JSON-RPC endpoint on the Convex backend with a
+    <strong>secure sign-in flow</strong>, so there are no API keys to paste and
+    every connection is scoped to your workspace.
     The trick that keeps it sane is a single tool registry: one
     TypeScript array is the source of truth, and both the public MCP server and
     the in-app AI chat run through the same code path and the same scope checks.
