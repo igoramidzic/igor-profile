@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import ChipLink from '../components/ChipLink.astro';
 import Socials from '../components/Socials.astro';
+import FeaturedThreads from '../components/FeaturedThreads.astro';
 import { orgs } from '../data/profile';
 
 const { keybank, kualia } = orgs;
@@ -66,6 +67,7 @@ const { keybank, kualia } = orgs;
 
     <footer class="foot">
       <Socials />
+      <FeaturedThreads />
     </footer>
   </main>
 </Base>

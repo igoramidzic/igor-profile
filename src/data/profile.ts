@@ -64,6 +64,24 @@ export const orgs: Record<string, Org> = {
   },
 };
 
+// Featured Threads posts, rendered as official Threads embeds on the home page.
+// These are just the clean post permalinks (tracking params stripped); Meta's
+// embed.js hydrates each one into a full post card client-side. To swap a
+// featured post, replace or reorder the URLs below.
+export const threadsPosts = [
+  'https://www.threads.com/@igoramidzic/post/DUmTraDjeY_',
+  'https://www.threads.com/@igoramidzic/post/DT_WjquFOxV',
+  'https://www.threads.com/@igoramidzic/post/DSlKK3HiFmB',
+  'https://www.threads.com/@igoramidzic/post/DRQaxizjSfP',
+  'https://www.threads.com/@igoramidzic/post/DQrHQrgDVw7',
+  'https://www.threads.com/@igoramidzic/post/DQpzM2yiNzg',
+  'https://www.threads.com/@igoramidzic/post/DP38QybjZzD',
+  'https://www.threads.com/@igoramidzic/post/DPIQotjjdRb',
+  'https://www.threads.com/@igoramidzic/post/DN80NLcCvLS',
+  'https://www.threads.com/@igoramidzic/post/DNG3qAIPiZb',
+  ''
+];
+
 export const socials = [
   {
     name: 'GitHub',

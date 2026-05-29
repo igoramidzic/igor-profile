@@ -1,0 +1,96 @@
+---
+// Renders featured Threads posts as official Threads embeds, lazily.
+//
+// Meta's embed.js only processes blockquotes carrying the `text-post-media`
+// class, and it processes at most 3 at a time, dequeuing the next as each one
+// reports back. Marking all posts up front can stall that queue when several
+// load at once. Instead we render bare placeholders and only add the
+// `text-post-media` class — then call instgrm.Embeds.process() — as each item
+// scrolls into view, so embeds hydrate a few at a time as the reader scrolls.
+import { threadsPosts } from '../data/profile';
+
+// Drop blank/placeholder entries from the data file.
+const posts = threadsPosts.filter((url) => url.trim().length > 0);
+---
+
+<section class="threads" aria-label="Featured Threads posts">
+  <h2 class="threads-heading">On Threads</h2>
+  <div class="threads-grid">
+    {
+      posts.map((url) => (
+        <div class="threads-item">
+          <blockquote data-text-post-permalink={url} />
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<script is:inline async src="https://www.threads.com/embed.js" charset="utf-8"></script>
+
+<script is:inline>
+  (() => {
+    // Ask embed.js to (re)scan for newly-marked blockquotes, if it's loaded yet.
+    // It's idempotent: already-hydrated embeds are skipped.
+    const process = () => window.instgrm?.Embeds?.process?.();
+
+    const reveal = (item) => {
+      const bq = item.querySelector('blockquote[data-text-post-permalink]');
+      if (!bq || bq.dataset.revealed) return;
+      bq.dataset.revealed = '1';
+      bq.className = 'text-post-media';
+      process();
+    };
+
+    const items = document.querySelectorAll('.threads-item');
+
+    if (!('IntersectionObserver' in window)) {
+      // No observer support: just reveal everything and let embed.js queue them.
+      items.forEach(reveal);
+      return;
+    }
+
+    const io = new IntersectionObserver(
+      (entries, obs) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            reveal(entry.target);
+            obs.unobserve(entry.target);
+          }
+        }
+      },
+      { rootMargin: '400px 0px' },
+    );
+    items.forEach((item) => io.observe(item));
+  })();
+</script>
+
+<style>
+  .threads {
+    margin-top: 2.5rem;
+  }
+  .threads-heading {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+  }
+  .threads-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  /* Reserve vertical space so the placeholders don't all stack at zero height
+     (which would put every item in the viewport at once and defeat lazy
+     loading). The embed iframe sets its own height once it hydrates. */
+  .threads-item {
+    min-height: 480px;
+  }
+  /* embed.js replaces each blockquote with its own card iframe. */
+  .text-post-media {
+    margin: 0;
+    max-width: 100%;
+  }
+</style>
