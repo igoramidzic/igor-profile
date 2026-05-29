@@ -54,7 +54,7 @@ body {
   background-color: var(--bg);
   background-image: radial-gradient(
     90% 60% at 50% -10%,
-    var(--accent-tint) 0%,
+    var(--bg-grad) 0%,
     transparent 60%
   );
   background-repeat: no-repeat;
@@ -102,7 +102,7 @@ body {
   left: 1rem;
   top: -100px;
   z-index: 10000;
-  background: var(--accent);
+  background: var(--text);
   color: #fff;
   padding: 0.5rem 1rem;
   font-weight: 600;
@@ -113,36 +113,37 @@ body {
   top: 1rem;
 }
 
-/* ---- reusable bits ---- */
-.glow {
-  /* crisp, Linear-style, no glow */
-}
-.panel {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
+/* ---- layout: a single, centered, left-aligned column (~max-w-3xl) ---- */
+.wrap {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 12vh, 7rem) clamp(1.25rem, 5vw, 2rem) 4rem;
 }
 
-/* ---- scroll reveal ---- */
-.reveal {
-  opacity: 0;
-  transform: translateY(26px);
-  transition:
-    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  transition-delay: var(--reveal-delay, 0ms);
-  will-change: opacity, transform;
+/* ---- prose: readable left-aligned body copy ---- */
+.prose {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text-dim);
 }
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+.prose p {
+  margin: 0 0 1.15rem;
 }
-
-/* timeline progress line fill, driven by --progress (0..1) from JS */
-.timeline-line-fill {
-  transform-origin: top;
-  transform: scaleY(var(--progress, 0));
+.prose p:last-child {
+  margin-bottom: 0;
+}
+.prose a:not(.chip) {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 3px;
+}
+.prose a:not(.chip):hover {
+  text-decoration-color: var(--text);
+}
+.prose strong {
+  color: var(--text);
+  font-weight: 600;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -155,9 +156,5 @@ body {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
-  }
-  .reveal {
-    opacity: 1;
-    transform: none;
   }
 }

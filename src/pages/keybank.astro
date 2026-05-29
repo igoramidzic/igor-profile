@@ -1,0 +1,29 @@
+---
+import Experience from '../layouts/Experience.astro';
+import { orgs } from '../data/profile';
+---
+
+<Experience org={orgs.keybank}>
+  <p>
+    I joined a brand-new platform at KeyBank on day one and helped build it from
+    an empty repository into the bank's primary tool for opening business
+    accounts. The application is built in <strong>Angular</strong> and <strong
+      >TypeScript</strong
+    >, and I've owned a good portion of the experience end to end.
+  </p>
+
+  <p>
+    Most of the core flows passed through my hands at some point: the
+    navigation, the progress tracker that keeps bankers oriented, product
+    selection, the cart review, and the applicant forms that capture everything
+    the bank needs to open an account.
+  </p>
+
+  <p>
+    We shipped from an internal pilot to a nationwide rollout now used by <strong
+      >1,500+ bankers</strong
+    >. Along the way, the time it takes to open a business account dropped from
+    over an hour to roughly ten minutes, a change people in branches actually
+    feel every day.
+  </p>
+</Experience>

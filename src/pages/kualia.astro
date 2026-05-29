@@ -1,0 +1,36 @@
+---
+import Experience from '../layouts/Experience.astro';
+import ChipLink from '../components/ChipLink.astro';
+import { orgs } from '../data/profile';
+---
+
+<Experience org={orgs.kualia}>
+  <p>
+    Kualia is a <strong>budgeting app</strong> that helps people give every dollar
+    a job and feel in control of their money. I came up with the idea, designed
+    it, built it, and launched it, entirely on my own.
+  </p>
+
+  <p>
+    I built the iPhone app with <strong>SwiftUI</strong>, the website with <strong
+      >Angular</strong
+    >, and the system that powers them both with <strong>Convex</strong>. Being
+    the only person on it means I also make the product calls, guided by what
+    real users tell me they need.
+  </p>
+
+  <p>
+    It's live on the App Store today and earns around <strong>$300</strong> in recurring
+    revenue every month. It's the project I'm proudest of, because every part of
+    it, good and bad, is a decision I made and shipped.
+  </p>
+
+  <p>
+    You can see it for yourself at <ChipLink
+      href="https://kualia.com"
+      label="kualia.com"
+      logo={orgs.kualia.logo}
+      external
+    />.
+  </p>
+</Experience>

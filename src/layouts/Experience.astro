@@ -1,0 +1,88 @@
+---
+import Base from './Base.astro';
+import Socials from '../components/Socials.astro';
+import type { Org } from '../data/profile';
+
+interface Props {
+  org: Org;
+}
+const { org } = Astro.props;
+const title = `${org.label} – ${org.role} | Igor Amidzic`;
+---
+
+<Base title={title} description={org.summary}>
+  <main class="wrap">
+    <a class="back" href="/">← Igor Amidzic</a>
+
+    <header class="head">
+      <img class="head-logo" src={org.logo} alt={`${org.label} logo`} />
+      <div>
+        <h1 class="head-org">{org.label}</h1>
+        <p class="head-role">{org.role}</p>
+        <p class="head-period">{org.period}</p>
+      </div>
+    </header>
+
+    <article class="prose">
+      <slot />
+    </article>
+
+    <footer class="foot">
+      <a class="back" href="/">← Back home</a>
+      <Socials />
+    </footer>
+  </main>
+</Base>
+
+<style>
+  .back {
+    display: inline-block;
+    color: var(--muted);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.18s ease;
+  }
+  .back:hover {
+    color: var(--text);
+  }
+  .head {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin: 2rem 0 2.25rem;
+  }
+  .head-logo {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    object-fit: cover;
+    flex: none;
+    background: var(--panel-2);
+  }
+  .head-org {
+    font-size: clamp(1.7rem, 5vw, 2.3rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+  .head-role {
+    margin-top: 0.25rem;
+    color: var(--text-dim);
+    font-weight: 600;
+  }
+  .head-period {
+    margin-top: 0.1rem;
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+  .foot {
+    margin-top: 3.5rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+</style>

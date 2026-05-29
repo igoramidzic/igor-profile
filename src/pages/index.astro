@@ -1,18 +1,91 @@
 ---
 import Base from '../layouts/Base.astro';
-import Nav from '../components/Nav.astro';
-import Hero from '../components/Hero.astro';
-import Timeline from '../components/Timeline.astro';
-import KualiaSpotlight from '../components/KualiaSpotlight.astro';
-import Footer from '../components/Footer.astro';
+import ChipLink from '../components/ChipLink.astro';
+import Socials from '../components/Socials.astro';
+import { orgs } from '../data/profile';
+
+const { keybank, kualia, 'foundations-it': foundations, vanguard, usf } = orgs;
 ---
 
 <Base>
-  <Nav />
-  <main id="main">
-    <Hero />
-    <Timeline />
-    <KualiaSpotlight />
+  <main id="main" class="wrap">
+    <header class="head">
+      <h1 class="name">Igor Amidzic</h1>
+      <p class="role">Software engineer &amp; founder · Tampa, Florida</p>
+    </header>
+
+    <article class="prose">
+      <p>
+        I'm a software engineer who's been building for over a decade. I care
+        most about web and mobile products that feel polished and are genuinely
+        pleasant to use, the kind where the details quietly add up.
+      </p>
+
+      <p>
+        Today I'm a senior frontend engineer at <ChipLink
+          href={`/${keybank.slug}`}
+          label={keybank.label}
+          logo={keybank.logo}
+        />, where I joined a greenfield platform on day one and helped grow it
+        into a tool now used by 1,500+ bankers across the country.
+      </p>
+
+      <p>
+        On my own time I founded and run <ChipLink
+          href={`/${kualia.slug}`}
+          label={kualia.label}
+          logo={kualia.logo}
+        />, a budgeting app for iPhone and web that I designed, built, and
+        shipped entirely myself, from the interface down to the system that
+        powers it.
+      </p>
+
+      <p>
+        Before all that, I worked my way from developer to team lead at <ChipLink
+          href={`/${foundations.slug}`}
+          label={foundations.label}
+          logo={foundations.logo}
+        />, spent an uneventful six months at <ChipLink
+          href={`/${vanguard.slug}`}
+          label={vanguard.label}
+          logo={vanguard.logo}
+        />, and studied computer science at <ChipLink
+          href={`/${usf.slug}`}
+          label={usf.label}
+          logo={usf.logo}
+        />.
+      </p>
+
+      <p>
+        Let's chat.
+      </p>
+    </article>
+
+    <footer class="foot">
+      <Socials />
+    </footer>
   </main>
-  <Footer />
 </Base>
+
+<style>
+  .head {
+    margin-bottom: 2.25rem;
+  }
+  .name {
+    font-size: clamp(2.2rem, 7vw, 3.25rem);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+  }
+  .role {
+    margin-top: 0.55rem;
+    font-size: clamp(1rem, 2.4vw, 1.15rem);
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .foot {
+    margin-top: 3rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--border);
+  }
+</style>

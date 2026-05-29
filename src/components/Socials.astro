@@ -1,0 +1,67 @@
+---
+import { socials } from '../data/profile';
+import { siGithub, siLinkedin, siThreads } from 'simple-icons';
+
+const icons: Record<string, { path: string; hex: string }> = {
+  github: { path: siGithub.path, hex: `#${siGithub.hex}` },
+  linkedin: { path: siLinkedin.path, hex: `#${siLinkedin.hex}` },
+  threads: { path: siThreads.path, hex: `#${siThreads.hex}` },
+};
+---
+
+<nav class="socials" aria-label="Contact links">
+  {
+    socials.map((s) => (
+      <a
+        class="social"
+        href={s.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={s.name}
+        style={`--brand:${icons[s.icon].hex}`}
+      >
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+          <path fill="currentColor" d={icons[s.icon].path} />
+        </svg>
+        <span>{s.name}</span>
+      </a>
+    ))
+  }
+</nav>
+
+<style>
+  .socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .social {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.4rem 0.85rem;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    background: var(--panel-2);
+    color: var(--text-dim);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+      border-color 0.18s ease,
+      background 0.18s ease,
+      color 0.18s ease;
+  }
+  .social svg {
+    color: var(--muted);
+    transition: color 0.18s ease;
+  }
+  .social:hover {
+    border-color: var(--brand);
+    color: var(--brand);
+    background: var(--panel);
+  }
+  .social:hover svg {
+    color: var(--brand);
+  }
+</style>
