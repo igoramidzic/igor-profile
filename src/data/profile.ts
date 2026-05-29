@@ -69,6 +69,9 @@ export const orgs: Record<string, Org> = {
 // embed.js hydrates each one into a full post card client-side. To swap a
 // featured post, replace or reorder the URLs below.
 export const threadsPosts = [
+  'https://www.threads.com/@igoramidzic/post/DWkTwhTlEhQ',
+  'https://www.threads.com/@igoramidzic/post/DWSTNtXjtn5',
+  'https://www.threads.com/@igoramidzic/post/DWPXiUWlO0W',
   'https://www.threads.com/@igoramidzic/post/DUmTraDjeY_',
   'https://www.threads.com/@igoramidzic/post/DT_WjquFOxV',
   'https://www.threads.com/@igoramidzic/post/DSlKK3HiFmB',
