@@ -6,6 +6,8 @@ export interface Org {
   slug: string;
   /** label shown inside the chip */
   label: string;
+  /** optional external website for the org page header */
+  website?: string;
   /** logo file in /public/logos */
   logo: string;
   /** role line shown on the org's own page */
@@ -29,6 +31,7 @@ export const orgs: Record<string, Org> = {
   kualia: {
     slug: 'kualia',
     label: 'Kualia',
+    website: 'https://kualia.com',
     logo: '/logos/kualia.jpg',
     role: 'Founder & Engineer',
     period: 'Aug 2023 – Present',

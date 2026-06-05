@@ -17,7 +17,35 @@ const title = `${org.label} – ${org.role} | Igor Amidzic`;
     <header class="head">
       <img class="head-logo" src={org.logo} alt={`${org.label} logo`} />
       <div>
-        <h1 class="head-org">{org.label}</h1>
+        <h1 class="head-org">
+          {
+            org.website ? (
+              <a
+                class="head-org-link"
+                href={org.website}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>{org.label}</span>
+                <svg
+                  class="head-link-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                </svg>
+              </a>
+            ) : (
+              org.label
+            )
+          }
+        </h1>
         <p class="head-role">{org.role}</p>
         <p class="head-period">{org.period}</p>
       </div>
@@ -66,6 +94,23 @@ const title = `${org.label} – ${org.role} | Igor Amidzic`;
     font-weight: 800;
     letter-spacing: -0.03em;
     line-height: 1.05;
+  }
+  .head-org-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: inherit;
+    text-decoration: none;
+  }
+  .head-org-link:hover .head-link-icon {
+    color: var(--text-dim);
+  }
+  .head-link-icon {
+    width: 0.58em;
+    height: 0.58em;
+    flex: none;
+    color: var(--muted);
+    transition: color 0.18s ease;
   }
   .head-role {
     margin-top: 0.25rem;
