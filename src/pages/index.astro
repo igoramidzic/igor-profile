@@ -15,7 +15,7 @@ const { keybank, kualia } = orgs;
       <p class="role">Software engineer &amp; founder · Tampa, Florida</p>
     </header>
 
-    <article class="prose">
+    <article class="prose" data-read-more>
       <p>
         I'm a senior software engineer with a decade of experience across the
         full stack, strongest on the frontend in <strong>TypeScript</strong> and
@@ -40,55 +40,66 @@ const { keybank, kualia } = orgs;
         for syntax I haven't used in a long time.
       </p>
 
-      <p>
-        The best coding agents already understand and write code at a senior or
-        staff engineer level. I no longer spend much time thinking about how to
-        write a React hook or pass props between components. My focus has moved
-        from lines of code to whole files, features, systems, and architecture. I
-        decide what should exist, give the agents the right context, review their
-        work, and steer when they go off course. That workflow has made me roughly
-        10x faster.
-      </p>
+      <div id="about-more" class="read-more-content" data-read-more-content>
+        <p>
+          The best coding agents already understand and write code at a senior or
+          staff engineer level. I no longer spend much time thinking about how to
+          write a React hook or pass props between components. My focus has moved
+          from lines of code to whole files, features, systems, and architecture.
+          I decide what should exist, give the agents the right context, review
+          their work, and steer when they go off course. That workflow has made me
+          roughly 10x faster.
+        </p>
 
-      <p>
-        On the <a href="https://yegge.ai/essays/welcome-to-gas-town/"
-          >Yegge Scale for AI-assisted development</a
-        >, I sit somewhere between levels 6 and 7: several agents running in
-        parallel, still managed by hand. I don't have much reason to chase level
-        8 and build a custom orchestrator right now. My personal projects are
-        mature and rarely have enough independent work to keep one busy. At
-        KeyBank, our tooling is more limited, and we don't have access to models
-        strong enough to make that kind of workflow practical.
-      </p>
+        <p>
+          On the <a href="https://yegge.ai/essays/welcome-to-gas-town/"
+            >Yegge Scale for AI-assisted development</a
+          >, I sit somewhere between levels 6 and 7: several agents running in
+          parallel, still managed by hand. I don't have much reason to chase level
+          8 and build a custom orchestrator right now. My personal projects are
+          mature and rarely have enough independent work to keep one busy. At
+          KeyBank, our tooling is more limited, and we don't have access to models
+          strong enough to make that kind of workflow practical.
+        </p>
 
-      <p>
-        Today I'm a senior fullstack engineer at <ChipLink
-          href={`/${keybank.slug}`}
-          label={keybank.label}
-          logo={keybank.logo}
-        />, where I'm building an internal AI platform that lets employees work
-        with specialized agents. I created the <strong>React</strong> app and am
-        building the backend too, using <strong>TypeScript</strong>,
-        <strong>Express</strong>, <strong>Postgres</strong>, and
-        <strong>Google ADK</strong>.
-      </p>
+        <p>
+          Today I'm a senior fullstack engineer at <ChipLink
+            href={`/${keybank.slug}`}
+            label={keybank.label}
+            logo={keybank.logo}
+          />, where I'm building an internal AI platform that lets employees work
+          with specialized agents. I created the <strong>React</strong> app and am
+          building the backend too, using <strong>TypeScript</strong>,
+          <strong>Express</strong>, <strong>Postgres</strong>, and
+          <strong>Google ADK</strong>.
+        </p>
 
-      <p>
-        On my own time I founded and run <ChipLink
-          href={`/${kualia.slug}`}
-          label={kualia.label}
-          logo={kualia.logo}
-        />, a budgeting app for iPhone and web that I designed, built, and
-        shipped entirely myself, from the interface down to the system that
-        powers it. I first built it with <strong>Flutter</strong> and
-        <strong>Supabase</strong>, then rebuilt it from scratch with agents using
-        <strong>SwiftUI</strong>, <strong>Convex</strong>, and
-        <strong>Angular</strong>.
-      </p>
+        <p>
+          On my own time I founded and run <ChipLink
+            href={`/${kualia.slug}`}
+            label={kualia.label}
+            logo={kualia.logo}
+          />, a budgeting app for iPhone and web that I designed, built, and
+          shipped entirely myself, from the interface down to the system that
+          powers it. I first built it with <strong>Flutter</strong> and
+          <strong>Supabase</strong>, then rebuilt it from scratch with agents using
+          <strong>SwiftUI</strong>, <strong>Convex</strong>, and
+          <strong>Angular</strong>.
+        </p>
 
-      <p>
-        Let's chat.
-      </p>
+        <p>
+          Let's chat.
+        </p>
+      </div>
+
+      <button
+        class="read-more-toggle"
+        type="button"
+        aria-controls="about-more"
+        aria-expanded="false"
+        data-read-more-toggle
+        hidden>Read More</button
+      >
     </article>
 
     <footer class="foot">
@@ -97,6 +108,74 @@ const { keybank, kualia } = orgs;
     </footer>
   </main>
 </Base>
+
+<script>
+  const readMoreSections = document.querySelectorAll<HTMLElement>('[data-read-more]');
+
+  for (const section of readMoreSections) {
+    const content = section.querySelector<HTMLElement>('[data-read-more-content]');
+    const toggle = section.querySelector<HTMLButtonElement>('[data-read-more-toggle]');
+
+    if (!content || !toggle) continue;
+
+    content.classList.add('is-collapsed');
+    content.inert = true;
+    content.setAttribute('aria-hidden', 'true');
+    toggle.hidden = false;
+    const collapsedHeight = content.getBoundingClientRect().height;
+    let activeAnimation: Animation | undefined;
+
+    const finishToggle = (expanded: boolean) => {
+      content.classList.remove('is-animating', 'is-collapsing');
+      content.classList.toggle('is-collapsed', !expanded);
+      content.inert = !expanded;
+      content.setAttribute('aria-hidden', String(!expanded));
+      activeAnimation?.cancel();
+      activeAnimation = undefined;
+    };
+
+    toggle.addEventListener('click', () => {
+      const shouldExpand = toggle.getAttribute('aria-expanded') === 'false';
+      const startHeight = content.getBoundingClientRect().height;
+
+      toggle.setAttribute('aria-expanded', String(shouldExpand));
+      toggle.textContent = shouldExpand ? 'Show Less' : 'Read More';
+      activeAnimation?.cancel();
+      content.classList.remove('is-collapsed', 'is-collapsing');
+
+      if (shouldExpand) {
+        content.inert = false;
+        content.setAttribute('aria-hidden', 'false');
+      } else {
+        content.classList.add('is-collapsing');
+      }
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        finishToggle(shouldExpand);
+        return;
+      }
+
+      content.classList.add('is-animating');
+      const endHeight = shouldExpand ? content.scrollHeight : collapsedHeight;
+      const animation = content.animate(
+        [
+          { height: `${startHeight}px` },
+          { height: `${endHeight}px` },
+        ],
+        {
+          duration: 420,
+          easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+          fill: 'both',
+        },
+      );
+
+      activeAnimation = animation;
+      animation.addEventListener('finish', () => {
+        if (activeAnimation === animation) finishToggle(shouldExpand);
+      });
+    });
+  }
+</script>
 
 <style>
   .head {
@@ -113,6 +192,61 @@ const { keybank, kualia } = orgs;
     font-size: clamp(1rem, 2.4vw, 1.15rem);
     font-weight: 600;
     color: var(--muted);
+  }
+  .read-more-content.is-collapsed,
+  .read-more-content.is-collapsing {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 22%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 22%,
+      transparent 100%
+    );
+  }
+  .read-more-content.is-collapsed {
+    max-height: clamp(7rem, 18vw, 8.5rem);
+  }
+  .read-more-content.is-animating {
+    overflow: hidden;
+    will-change: height;
+  }
+  .read-more-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.35rem auto 0;
+    padding: 0.45rem 1rem;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    background: var(--panel-2);
+    color: var(--text-dim);
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.3;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition:
+      border-color 0.18s ease,
+      background 0.18s ease,
+      color 0.18s ease;
+  }
+  .read-more-toggle:hover {
+    border-color: var(--accent-soft);
+    background: var(--panel);
+    color: var(--accent-dim);
+  }
+  .read-more-toggle[aria-expanded='true'] {
+    margin-top: 1.25rem;
+  }
+  .read-more-toggle[hidden] {
+    display: none;
   }
   .foot {
     margin-top: 3rem;

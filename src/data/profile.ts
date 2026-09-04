@@ -23,10 +23,10 @@ export const orgs: Record<string, Org> = {
     slug: 'keybank',
     label: 'KeyBank',
     logo: '/logos/keybank.jpg',
-    role: 'Senior Frontend Software Engineer',
+    role: 'Senior Full Stack Software Engineer',
     period: '2022 – Present',
     summary:
-      'Senior engineer at KeyBank: built a greenfield account-opening platform now used by 1,500+ bankers nationwide, now building the bank\'s first internal AI agents.',
+      'Senior full stack engineer at KeyBank building an internal React and TypeScript platform for employees to work with specialized AI agents.',
   },
   kualia: {
     slug: 'kualia',

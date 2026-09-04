@@ -14,11 +14,13 @@ import { orgs } from '../data/profile';
   </p>
 
   <p>
-    I built the iPhone app with <strong>SwiftUI</strong>, the website with <strong
-      >Angular</strong
-    >, and the system that powers them both with <strong>Convex</strong>. Being
-    the only person on it means I also make the product calls, guided by what
-    real users tell me they need.
+    I originally built Kualia with <strong>Flutter</strong> and
+    <strong>Supabase</strong>, then rebuilt it from scratch with coding agents.
+    The current iPhone app uses <strong>SwiftUI</strong>, the website uses
+    <strong>Angular</strong>, and <strong>Convex</strong> powers them both. I built
+    the production iPhone app without ever writing SwiftUI by hand. Being the
+    only person on it means I also make the product calls, guided by what real
+    users tell me they need.
   </p>
 
   <p>
@@ -46,12 +48,12 @@ import { orgs } from '../data/profile';
       rel="noopener noreferrer">MCP server<span class="ext" aria-hidden="true"
         >↗</span
       ></a
-    >. Kualia speaks the Model Context Protocol, so any assistant
-    you already pay for, Claude, ChatGPT, Cursor, Perplexity, can read your
-    transactions, envelopes, recurring bills, and reports directly, with your
-    permission. You ask questions in plain English instead of opening
-    dashboards: <em>"What categories am I overspending in this month?"</em> or
-    <em>"How much am I spending on recurring subscriptions?"</em>
+    >. Kualia speaks the Model Context Protocol, so compatible assistants such
+    as Codex, Claude Code, and ChatGPT can read your transactions, envelopes,
+    recurring bills, and reports directly, with your permission. You ask
+    questions in plain English instead of opening dashboards: <em
+      >"What categories am I overspending in this month?"</em
+    > or <em>"How much am I spending on recurring subscriptions?"</em>
   </p>
 
   <p>
@@ -74,11 +76,10 @@ import { orgs } from '../data/profile';
   <p>
     Under the hood it's a JSON-RPC endpoint on the Convex backend with a
     <strong>secure sign-in flow</strong>, so there are no API keys to paste and
-    every connection is scoped to your workspace.
-    The trick that keeps it sane is a single tool registry: one
-    TypeScript array is the source of truth, and both the public MCP server and
-    the in-app AI chat run through the same code path and the same scope checks.
-    Add a tool once and both surfaces get it.
+    every connection is scoped to your workspace. The trick that keeps it sane
+    is a single TypeScript tool registry. Each tool is defined once, and the MCP
+    server dispatches it through the same backend scope and permission checks as
+    the rest of Kualia.
   </p>
 
   <p>
