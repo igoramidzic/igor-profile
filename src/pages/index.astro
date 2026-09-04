@@ -19,32 +19,58 @@ const { keybank, kualia } = orgs;
       <p>
         I'm a senior software engineer with a decade of experience across the
         full stack, strongest on the frontend in <strong>TypeScript</strong> and
-        <strong>Angular</strong>, with <strong>React</strong> in the mix lately.
-        Over the last year I've gradually shifted from writing every line by hand
-        to building apps primarily with Claude Code. Leaning on my engineering
-        experience, I spend less time on the exact syntax of a given framework
-        like React and more time mapping the frontend concepts that carry across
-        all of them, then using that to keep the agent headed in the right
-        direction.
+        <strong>Angular</strong>. I've also built complex production apps with
+        <strong>React</strong> and <strong>SwiftUI</strong>, including KeyBank's
+        internal AI platform and Kualia's iPhone app, without ever writing either
+        one by hand. That changed how I think about engineering. I don't think we
+        need to know every language or framework at the syntax level anymore.
+        What matters more is understanding the ideas underneath: programming
+        fundamentals, frontend design, how frontend frameworks work, backend
+        system design, and how all of it fits together.
       </p>
 
       <p>
-        That workflow runs on <strong>Claude Code</strong>, my daily driver,
-        which I prompt by voice with <strong>WisprFlow</strong> to get past the
-        typing-speed bottleneck. I've put real work into sharpening how I prompt,
-        which has roughly 10x'd my output while keeping code quality around a
-        self-proclaimed 90% of what I'd write by hand.
+        The shift wasn't overnight. Starting in early 2025, I gradually moved
+        from writing code myself to prompting agents. I spent about a year
+        with <strong>Claude Code</strong> before switching to
+        <strong>Codex</strong>, which is now my daily driver. I talk to it through
+        <strong>Wispr Flow</strong>, and agents now write 100% of the code. My
+        actual code-typing speed has fallen off quite a bit. On the rare occasion
+        I need to write something myself, I have to reach into the back of my mind
+        for syntax I haven't used in a long time.
       </p>
 
       <p>
-        Today I'm a senior frontend engineer at <ChipLink
+        The best coding agents already understand and write code at a senior or
+        staff engineer level. I no longer spend much time thinking about how to
+        write a React hook or pass props between components. My focus has moved
+        from lines of code to whole files, features, systems, and architecture. I
+        decide what should exist, give the agents the right context, review their
+        work, and steer when they go off course. That workflow has made me roughly
+        10x faster.
+      </p>
+
+      <p>
+        On the <a href="https://yegge.ai/essays/welcome-to-gas-town/"
+          >Yegge Scale for AI-assisted development</a
+        >, I sit somewhere between levels 6 and 7: several agents running in
+        parallel, still managed by hand. I don't have much reason to chase level
+        8 and build a custom orchestrator right now. My personal projects are
+        mature and rarely have enough independent work to keep one busy. At
+        KeyBank, our tooling is more limited, and we don't have access to models
+        strong enough to make that kind of workflow practical.
+      </p>
+
+      <p>
+        Today I'm a senior fullstack engineer at <ChipLink
           href={`/${keybank.slug}`}
           label={keybank.label}
           logo={keybank.logo}
-        />, where I joined a greenfield platform on day one and helped grow it
-        into a tool now used by 1,500+ bankers across the country. At this large bank,
-        AI tools are still new and slow to become available. We're stuck using lower quality models
-        from Gemini.
+        />, where I'm building an internal AI platform that lets employees work
+        with specialized agents. I created the <strong>React</strong> app and am
+        building the backend too, using <strong>TypeScript</strong>,
+        <strong>Express</strong>, <strong>Postgres</strong>, and
+        <strong>Google ADK</strong>.
       </p>
 
       <p>
@@ -54,10 +80,10 @@ const { keybank, kualia } = orgs;
           logo={kualia.logo}
         />, a budgeting app for iPhone and web that I designed, built, and
         shipped entirely myself, from the interface down to the system that
-        powers it. I first built it in <strong>Flutter</strong> and
-        <strong>Supabase</strong>, then rewrote it from scratch, 100%
-        agentically with Claude Code, in <strong>SwiftUI</strong>,
-        <strong>Convex</strong>, and <strong>Angular</strong>.
+        powers it. I first built it with <strong>Flutter</strong> and
+        <strong>Supabase</strong>, then rebuilt it from scratch with agents using
+        <strong>SwiftUI</strong>, <strong>Convex</strong>, and
+        <strong>Angular</strong>.
       </p>
 
       <p>
