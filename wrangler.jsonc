@@ -1,0 +1,11 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "igoramidzic",
+  "compatibility_date": "2026-09-22",
+  // Astro pre-renders every page, so no Worker entry point or adapter is needed.
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  }
+}

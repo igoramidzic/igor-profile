@@ -17,6 +17,8 @@ anyone, recruiters included.
 
 ## Develop
 
+Use Node.js 22 (see `.node-version`) and pnpm 10.34.5 (pinned in `package.json`).
+
 ```bash
 pnpm install
 pnpm dev        # http://localhost:4321
@@ -35,7 +37,36 @@ pnpm preview    # preview the production build
 | Brand logos             | `public/logos/*` — swap in official marks (any image format) |
 | Colors / theme          | `src/styles/global.css` (`:root` tokens)                    |
 
-## Deploy (Vercel)
+## Deploy (Cloudflare Workers)
 
-Push to a Git repo and import it in Vercel — Astro is auto-detected (build
-`astro build`, output `dist/`). No adapter needed for the static build.
+This is a fully static Astro site. Cloudflare Workers serves `dist/` directly
+using `wrangler.jsonc`; no Worker script or Astro Cloudflare adapter is needed.
+Unknown URLs return 404 instead of falling back to the homepage.
+
+```bash
+pnpm install --frozen-lockfile
+pnpm preview:cloudflare # build and preview using Cloudflare's local runtime
+pnpm exec wrangler login # authenticate once for local deployments
+pnpm run deploy         # build and deploy to Cloudflare Workers
+```
+
+For Git deployments, connect this repository in Cloudflare Workers & Pages and
+create a **Worker** with these build settings:
+
+- Worker name: `igoramidzic` (must match `name` in `wrangler.jsonc`)
+- Build command: `pnpm build`
+- Deploy command: `pnpm exec wrangler deploy`
+- Root directory: repository root
+
+After checking the deployed `workers.dev` URL, attach `igoramidzic.com` under the
+Worker's **Settings → Domains & Routes** as a custom domain and complete the DNS
+cutover from Vercel. The canonical site URL in `astro.config.mjs` stays the same.
+Retire the Vercel deployment after confirming the custom domain works.
+
+Vercel Analytics has been removed. Configure Cloudflare Web Analytics separately
+if visitor analytics are wanted.
+
+If using **Cloudflare Pages** instead, use build command `pnpm build` and output
+directory `dist`; Pages does not use this Workers deployment configuration.
+
+See [Cloudflare's Astro deployment guide](https://developers.cloudflare.com/workers/framework-guides/web-apps/astro/#if-you-have-a-static-site).
