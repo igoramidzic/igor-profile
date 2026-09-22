@@ -20,13 +20,6 @@
     "@tailwindcss/vite": "^4.0.0",
     "simple-icons": "^13.0.0",
     "tailwindcss": "^4.0.0",
-    "wrangler": "^4.136.3"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "sharp",
-      "workerd"
-    ]
+    "wrangler": "4.136.1"
   }
 }

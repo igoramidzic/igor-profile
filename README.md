@@ -17,7 +17,7 @@ anyone, recruiters included.
 
 ## Develop
 
-Use Node.js 22 (see `.node-version`) and pnpm 10.34.5 (pinned in `package.json`).
+Use Node.js 22 (see `.node-version`) and pnpm 12.5.1 (pinned in `package.json`).
 
 ```bash
 pnpm install
